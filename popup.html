@@ -1,0 +1,46 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Add some basic styling for the popup */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="formSubmissions">
+      <tr>
+        <th>Timestamp</th>
+        <th>Form Data</th>
+      </tr>
+    </table>
+
+    <script>
+      // Get the form submissions from local storage
+      let submissions = JSON.parse(localStorage.getItem("formSubmissions")) || [];
+
+      // Populate the table with the form submissions
+      let table = document.getElementById("formSubmissions");
+      for (let submission of submissions) {
+        let row = table.insertRow();
+        let timestampCell = row.insertCell();
+        let formDataCell = row.insertCell();
+        timestampCell.innerHTML = new Date(submission.timestamp).toLocaleString();
+        formDataCell.innerHTML = JSON.stringify(submission.data);
+      }
+    </script>
+  </body>
+</html>
